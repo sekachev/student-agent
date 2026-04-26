@@ -1,0 +1,8 @@
+# Project-local Codex config.
+# Hooks load only after the student trusts this project in Codex.
+# AGENTS.md is added as a project root marker so the unpacked MVP folder works
+# even before it is turned into a git repository.
+project_root_markers = [".git", "AGENTS.md"]
+
+[features]
+codex_hooks = true

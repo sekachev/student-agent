@@ -1,0 +1,29 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'd=\"$PWD\"; while [ \"$d\" != \"/\" ] && [ -n \"$d\" ]; do if [ -f \"$d/.codex/hooks/dreaming.py\" ]; then exec python3 \"$d/.codex/hooks/dreaming.py\" session-start; fi; d=$(dirname \"$d\"); done; printf %s \"{\\\"continue\\\":true,\\\"systemMessage\\\":\\\"learning-agent hook script not found; continue normally\\\"}\"'",
+            "statusMessage": "Loading learning memory and homework reminders",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "sh -c 'd=\"$PWD\"; while [ \"$d\" != \"/\" ] && [ -n \"$d\" ]; do if [ -f \"$d/.codex/hooks/dreaming.py\" ]; then exec python3 \"$d/.codex/hooks/dreaming.py\" stop; fi; d=$(dirname \"$d\"); done; printf %s \"{\\\"continue\\\":true,\\\"systemMessage\\\":\\\"learning-agent hook script not found; continue normally\\\"}\"'",
+            "statusMessage": "Checking learning memory",
+            "timeout": 20
+          }
+        ]
+      }
+    ]
+  }
+}
