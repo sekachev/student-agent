@@ -19,6 +19,7 @@ from typing import Any
 
 DEFAULT_API_URL = "https://hw.sekachev.ee"
 DEFAULT_TOKEN_ENV = "HOMEWORK_API_TOKEN"
+DEFAULT_USER_AGENT = "CodexHomeworkClient/1.0"
 CONTENT_LIMIT_BYTES = 262_144
 
 
@@ -59,7 +60,11 @@ def read_content(path: Path) -> bytes:
 
 def request_json(method: str, url: str, headers: dict[str, str] | None = None, payload: dict[str, Any] | None = None) -> tuple[int, dict[str, Any] | str]:
     body = None
-    req_headers = headers or {}
+    req_headers = {
+        "User-Agent": DEFAULT_USER_AGENT,
+        "Accept": "application/json",
+        **(headers or {}),
+    }
     if payload is not None:
         body = json.dumps(payload, ensure_ascii=False).encode("utf-8")
         req_headers = {**req_headers, "Content-Type": "application/json"}
